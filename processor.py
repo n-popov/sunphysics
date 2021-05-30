@@ -1,17 +1,15 @@
 from PIL import Image
-import cache
-import hashlib
 
 
-
-def red_level(image_name, images_cache):
-    image_hash = hash(image_name)
-    if image_hash in images_cache.data.keys():
-        return images_cache[image_hash]
-    retval = 0
+def red_level(image_name):
+    print(f"processing {image_name}")
+    reds = []
     image = Image.open(image_name)
-    for x_idx in range(image.width):
-        for y_idx in range(image.height):
-           retval += image.getpixel((x_idx, y_idx))[0]
-    images_cache.data[image_hash] = retval
-    return retval
+    for x_idx in range(1700, 2100):
+        for y_idx in range(1230, 1450):
+            R, _, _ = image.getpixel((x_idx, y_idx))
+            if R > 30:
+                reds.append(R)
+    if len(reds) == 0:
+        return 0
+    return sum(reds) / len(reds)
