@@ -9,7 +9,7 @@ class Cache:
     def __getitem__(self, item):
         return self.data[item]
 
-    def __del__(self):
+    def save_cache(self):
         file = open('cache.txt', 'w')
         for hash, value in self.data.items():
             file.write(hash + ' ' + value)

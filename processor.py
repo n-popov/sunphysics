@@ -4,7 +4,6 @@ import hashlib
 
 images_cache = cache.Cache()
 
-
 def red_level(image_name):
     image_hash = hash(image_name)
     if image_hash in images_cache.data.keys():
@@ -16,3 +15,5 @@ def red_level(image_name):
            retval += image.getpixel((x_idx, y_idx))[0]
     images_cache.data[image_hash] = retval
     return retval
+
+images_cache.save_cache()
