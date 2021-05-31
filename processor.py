@@ -2,7 +2,7 @@ from PIL import Image
 
 
 def red_level(image_name):
-    print(f"processing {image_name}")
+#    print(f"processing {image_name}")
     reds = []
     image = Image.open(image_name)
     for x_idx in range(1700, 2100):

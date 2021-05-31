@@ -8,9 +8,9 @@ def extract(directory):
 
 
 class ExperimentsHolder:
-    def __init__(self, directories, deltas):
+    def __init__(self, directories, angles, deltas):
         self.data = list(zip([extract(directory) for directory in directories],
-                             deltas))
+                             angles, deltas))
 
     def __getitem__(self, item):
         return self.data[item]

@@ -9,11 +9,15 @@ experiment_directories = [os.path.join(os.getcwd(), directory)
 experiment_deltas = [os.path.join(os.getcwd(), filename)
                      for filename in os.listdir(os.getcwd())
                      if 'delta' in filename]
+experiment_angles = [os.path.join(os.getcwd(), filename)
+                     for filename in os.listdir(os.getcwd())
+                     if 'angle' in filename]
 
 print(experiment_directories)
-experiments = experiments_holder.ExperimentsHolder(experiment_directories, experiment_deltas)
+experiments = experiments_holder.ExperimentsHolder(experiment_directories, experiment_angles, experiment_deltas)
 
-for name, (images, deltas_file) in enumerate(experiments):
+for name, (images, angles_file, deltas_file) in enumerate(experiments):
     deltas = [float(line) for line in open(deltas_file)]
-    visualizer.visualize([processor.red_level(image) / delta
+    angles = [float(line) for line in open(angles_file).readlines()]
+    visualizer.visualize(angles, [processor.red_level(image) / delta
                           for image, delta in zip(images, deltas)], str(name + 1))
